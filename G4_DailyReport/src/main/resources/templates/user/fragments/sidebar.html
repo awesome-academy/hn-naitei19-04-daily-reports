@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Taco Cloud</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" th:href="@{/sidebar.css}">
+    <!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+</head>
+
+<!--  <body>-->
+<!--    <h1>Welcome to...</h1>-->
+<!--    <img th:src="@{/images/TacoCloud.png}"/>-->
+<!--    -->
+<!--    <a th:href="@{/design}" id="design">Design a taco</a>-->
+<!--  </body>-->
+<body>
+<div th:fragment="side-bar">
+    <div id="sidebar-wrapper">
+        <aside id="sidebar">
+            <ul id="sidemenu" class="sidebar-nav">
+                <li>
+                    <a href="/projects">
+                        <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                        <span class="sidebar-title">My Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/reports/new">
+                        <span class="sidebar-icon"><i class="fa fa-newspaper-o"></i></span>
+                        <span class="sidebar-title">Daily Report</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/reports/">
+                        <span class="sidebar-icon"><i class="fa fa-history"></i></span>
+                        <span class="sidebar-title">Report history</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</div>
+</body>
+</html>

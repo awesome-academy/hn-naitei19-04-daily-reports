@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daily Reports</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" th:href="@{/sidebar.css}">
+    <!--    <link rel="stylesheet" th:href="@{/styles.css}" />-->
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div th:insert="user/fragments/navbar.html :: header"></div>
+<div id="wrapper">
+
+    <div th:replace="user/fragments/sidebar.html :: side-bar"></div>
+    <main id="page-content-wrapper" role="main">
+        <div class="card card-info">
+            <div class="card-header">
+                <div class="header-block">
+                    <h2 class="title">Today's Report</h2>
+                </div>
+            </div>
+            <div class="card-block">
+                <section class="mod-course">
+                    <div class="container">
+                        <form action="/reports" accept-charset="UTF-8" method="post">
+                            <div class="form-group">
+                                <label for="report_project">Select project</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <select class="form-control add_dropdown_icon" name="report[course_id]"
+                                                id="report_project">
+                                            <option value="361">[Project_1] 07/08/2023</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="report_date">Date</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input value="15-09-2023" class="form-control hasDatepicker" readonly="readonly"
+                                               type="text" name="report[created_at]" id="report_date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="label--required" for="report_actual_work">Actual work </label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <textarea rows="4" class="form-control" name="report[work_today]"
+                                                  id="report_actual_work">
+                                            Thời gian làm việc :
+                                            Thời gian học tiếng Nhật :
+                                            Actual work :
+                                            - Nghiên cứu chức năng ABC - 100% - 2h
+                                            - Thực hiện ticket: #link ticket - 80% - 6h-</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="report_problem">Reasons can not complete work</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <textarea class="form-control" name="report[problem]"
+                                              id="report_problem"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="label--required" for="report_tomorrow_plan">Tomorrow's plan</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <textarea class="form-control" name="report[work_tomorrow]"
+                                              id="report_tomorrow_plan"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" name="commit" value="Submit" class="btn btn-primary"
+                                   data-disable-with="Submitting">
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
