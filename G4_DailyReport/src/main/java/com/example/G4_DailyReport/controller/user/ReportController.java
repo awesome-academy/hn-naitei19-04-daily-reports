@@ -70,7 +70,7 @@ public class ReportController {
 
     @PostMapping("/")
     public String create(@Valid Report report, Errors errors) {
-        User user = userRepo.findByUserName(CurrentUserUtil.getCurrentUser().getUsername()).orElse(null);
+        User user = userRepo.findByUserName(projectRepo.findProjectById(report.getProject().getId()).getCreatedBy()).orElse(null);
         report.setUser(user);
         if (errors.hasErrors()) {
             return "/user/reports/new";
