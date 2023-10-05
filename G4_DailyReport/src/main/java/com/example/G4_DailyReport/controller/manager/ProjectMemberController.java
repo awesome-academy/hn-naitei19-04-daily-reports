@@ -21,26 +21,24 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/manager")
+@RequestMapping("/manager/projects-management")
+@PreAuthorize("hasRole('ROLE_MANAGER')")
 public class ProjectMemberController {
 	@Autowired
 	ProjectMemberService projectMemberService;
-	//@Autowired
-	//private ManagerSingleton managerSingleton;
+	
 	@ModelAttribute("user")
 	public User loadCurrentUser() {
 		return projectMemberService.getUserByUserUName(CurrentUserUtil.getCurrentUser().getUsername());
 	}
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-	@GetMapping("/projects-management")
+	@GetMapping("/")
 	public String managerProjectPage(Model model) {
 		List<Project> projects = projectMemberService.getAllProjectOfUser(loadCurrentUser().getId().toString());
 		model.addAttribute("projects", projects);
 		return "managers/pages/projects-management";
 	}
     
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-	@GetMapping("/project-management/{projectId}/members")
+	@GetMapping("/{projectId}/members")
 	public String managerMembers(@RequestParam(name="query",defaultValue = "") String query,@PathVariable String projectId,@RequestParam(defaultValue = "0") int page,Model model) {
 		model.addAttribute("usersPage", projectMemberService.getAllUserOfProject(query,page, projectId));
 		model.addAttribute("projectId",projectId);
@@ -48,8 +46,7 @@ public class ProjectMemberController {
 		return "managers/pages/members-in-project-management";
 	}
     
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
-	@GetMapping("/project-management/{projectId}/addMembers")
+	@GetMapping("/{projectId}/addMembers")
 	public String managerAddMember(@RequestParam(defaultValue = "") String query,@PathVariable String projectId,@RequestParam(defaultValue = "0") int page,Model model) {
 		model.addAttribute("usersPage", projectMemberService.getAllUserNotOfProject(query,projectId, page));
 		System.out.println(projectMemberService.getAllUserNotOfProject(query,projectId, page).getSize());
@@ -59,16 +56,16 @@ public class ProjectMemberController {
 	}
 	
     
-	@GetMapping("/project-management/{projectId}/add-member")
+	@GetMapping("/{projectId}/add-member")
 	public String addMembertoProject(String query,@PathVariable String projectId,String userId) {
 		int currentPage = projectMemberService.addMember(userId, projectId);
-		return "redirect:/manager/project-management/"+projectId+"/addMembers?query="+query+"&page="+currentPage;
+		return "redirect:/manager/projects-management/"+projectId+"/addMembers?query="+query+"&page="+currentPage;
 	}
 	
-	@GetMapping("/project-management/{projectId}/delete-member")
+	@GetMapping("/{projectId}/delete-member")
 	public String deleteMemberfromProject(String query,@PathVariable String projectId,String userId) {
 		int currentPage = projectMemberService.deleteMember(userId,projectId);
-		return "redirect:/manager/project-management/"+projectId+"/members?query="+query+"&page="+currentPage;
+		return "redirect:/manager/projects-management/"+projectId+"/members?query="+query+"&page="+currentPage;
 	}
 
 }

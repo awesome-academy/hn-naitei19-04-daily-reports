@@ -15,9 +15,9 @@
 						<div class="bg-light rounded p-2">
 							<h6 class="mb-2" th:text="${project_each.name}"></h6>
 							<div class="d-flex align-items-center justify-content-between">
-								<a th:href="@{/manager/project-management/{projectId}/addMembers(projectId=${project_each.id})}">Add Member</a>
+								<a th:href="@{/manager/projects-management/{projectId}/addMembers(projectId=${project_each.id})}">Add Member</a>
 						
-								<span><a th:href="@{/manager/project-management/{projectId}/members(projectId=${project_each.id})}"><i class="fas fa-users"></i></a><a th:href="@{/manager/project-management/{projectId}/members(projectId=${project_each.id})}" th:text="${project_each.projectMembers.size()}"></a></span>
+								<span><a th:href="@{/manager/projects-management/{projectId}/members(projectId=${project_each.id})}"><i class="fas fa-users"></i></a><a th:href="@{/manager/project-management/{projectId}/members(projectId=${project_each.id})}" th:text="${project_each.projectMembers.size()}"></a></span>
 							</div>
 							<hr class="my-2">
 							<div class="d-flex justify-content-between">

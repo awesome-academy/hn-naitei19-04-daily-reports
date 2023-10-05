@@ -11,7 +11,7 @@ import org.springframework.data.domain.Pageable;
 import com.example.G4_DailyReport.model.User;
 
 public class PagingUtil {
-	private final static int PAGE_SIZE=5;
+	private final static int PAGE_SIZE = 5;
 
 	public static <T> Page<T> getPage(List<T> objects, int page) {
 		int totalElements = objects.size();
@@ -31,20 +31,19 @@ public class PagingUtil {
 	}
 
 	public static int calculatePageNumber(List<User> userList, UUID userId) {
-       
-		int pageSize =PAGE_SIZE;
-		int userIndex =-1;
-	    for (int i = 0; i < userList.size(); i++) {
-	        if (userList.get(i).getId().equals(userId)) {
-	            userIndex = i;
-	            System.out.println(i);
-	            break;
-	        }
-	    }
-	    if (userIndex >= 0) {
-	        return userIndex / pageSize;
-	    } else {
-	        return 0;
-	    }
+
+		int pageSize = PAGE_SIZE;
+		int userIndex = -1;
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getId().equals(userId)) {
+				userIndex = i;
+				System.out.println(i);
+				break;
+			}
+		}
+		if (userIndex >= 0) {
+			return userIndex / pageSize;
+		}
+		    return 0;
 	}
 }
