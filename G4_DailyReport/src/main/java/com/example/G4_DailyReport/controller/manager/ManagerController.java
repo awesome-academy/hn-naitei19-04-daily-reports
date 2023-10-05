@@ -14,25 +14,21 @@ import com.example.G4_DailyReport.util.CurrentUserUtil;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/manager")
+@PreAuthorize("hasRole('ROLE_MANAGER')")
 public class ManagerController {
 	@Autowired
 
 	ManagerService managerService;
-//	@Autowired
-//	private ManagerSingleton managerSingleton;
-
 
 	@ModelAttribute("user")
 	public User loadCurrentUser() {
 		return managerService.getUserByUserUName(CurrentUserUtil.getCurrentUser().getUsername());
 	}
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
 	@GetMapping("/departments")
 	public String managerHomepage() {
 		
 		return "managers/pages/department";
 	}
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
 	@GetMapping("/departments/listEmployee")
 	public String managerDepartments(Model model,@RequestParam(defaultValue = "")String query, @RequestParam(defaultValue = "0") int page) {
 		model.addAttribute("usersPage",
@@ -40,7 +36,6 @@ public class ManagerController {
 		model.addAttribute("queryName",query);
 		return "managers/pages/employees-in-department";
 	}
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
 	@GetMapping("/departments/addEmployee")
 	public String managerAddEmployee(Model model,@RequestParam(defaultValue = "")String query, @RequestParam(defaultValue = "0") int page) {
 		model.addAttribute("usersPage", managerService.getAllUserNoDepartment(query,page));
